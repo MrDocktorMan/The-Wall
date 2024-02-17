@@ -23,6 +23,10 @@ public class PlayerControls : MonoBehaviour
     public bool onSpring = false;
 
 
+    float muddy = 1;
+    public float mudVar;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -57,7 +61,7 @@ public class PlayerControls : MonoBehaviour
 
     private void FixedUpdate()
     {
-        velocity.x = Input.GetAxisRaw("Horizontal") * speed;
+        velocity.x = Input.GetAxisRaw("Horizontal") * speed * muddy;
        
         //print(airTime);
         if (airTime > 0)
@@ -76,6 +80,18 @@ public class PlayerControls : MonoBehaviour
         else
         {
             Invoke("onSpringOff", 0.2f);
+        }
+
+        if(muddy < 1)
+        {
+            muddy += Time.deltaTime* .5f;
+
+
+        }
+        else if (muddy > 1)
+        {
+            muddy = 1;
+
         }
 
 
@@ -97,26 +113,40 @@ public class PlayerControls : MonoBehaviour
     {
         onSpring = false;
     }
-    void OnTriggerStay2D(Collider2D col)
-    {
-        if (col.gameObject.tag == "wall")
-        {
-            print("wall");
-            SceneManager.LoadScene("GameScene");
-        }
-        if (col.gameObject.tag == "levelEnd")
-        {
-            SceneManager.LoadScene("winScene");
-        }
-    }
+
     void OnTriggerEnter2D(Collider2D col)
     {
-        if (col.gameObject.tag == "spring")
+
+        switch(col.gameObject.tag)
         {
-            onSpring = true;
-            print("spring");
-            rb.AddForce(new Vector2(-springPower, 0f), ForceMode2D.Impulse);
+            case "spring":
+                onSpring = true;
+                print("spring");
+                rb.AddForce(new Vector2(-springPower, 0f), ForceMode2D.Impulse);
+                break;
+
+            case "wall":
+                //print("wall");
+                //SceneManager.LoadScene("GameScene");
+                break;
+
+            case "levelEnd":
+               // SceneManager.LoadScene("winScene");
+                break;
+
+            case "Mud":
+                muddy = mudVar;
+                break;
+
+
+
+
         }
+
+
+
+
+
     }
 
 

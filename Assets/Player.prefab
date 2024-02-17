@@ -209,8 +209,9 @@ MonoBehaviour:
   GroundTouchy:
     serializedVersion: 2
     m_Bits: 256
-  springPower: 0
+  springPower: 15
   onSpring: 0
+  mudVar: 0.1
 --- !u!70 &2430201776461321942
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
