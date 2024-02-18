@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - upSpring
+  - levelEnd
+  - spring
+  - wall
+  - leftSpring
+  - checkpoint
+  - mud
   layers:
   - Default
   - TransparentFX
@@ -13,9 +20,9 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
+  - player
+  - platform
+  - pain
   - 
   - 
   - 
